@@ -4,7 +4,8 @@
   "description": "The public website for the Design System Team to document reusable designs and related University of Michigan Library website guidelines.",
   "main": "index.js",
   "scripts": {
-    "start": "eleventy --serve --port=1980"
+    "start": "eleventy --serve --port=1980",
+    "build": "eleventy build"
   },
   "author": "University of Michigan Library Design System Team <library-design-system-team@umich.edu>",
   "license": "ISC",
