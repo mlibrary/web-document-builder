@@ -1,0 +1,88 @@
+---
+pagination:
+    data: webdocs
+    size: 1
+    alias: doc
+permalink: "{{ doc.title | slug }}/"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ doc.title }} | {{ doc.website.name }}</title>
+    <meta name="description" content="{{ doc.description }}">
+
+    <link href="https://unpkg.com/@umich-lib/web@1/umich-lib.css" rel="stylesheet"/>
+    <script type="module" src="https://unpkg.com/@umich-lib/web@1/dist/umich-lib/umich-lib.esm.js"></script>
+  </head>
+</head>
+    <body>
+    <style>
+        body,
+        html {
+            height: 100%;
+        }
+        body {
+            min-height: 100%;
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+        }
+        </style>
+
+        <m-universal-header></m-universal-header>
+        <m-website-header name="{{ doc.website.name }} "></m-website-header>
+
+        <div class="viewport-container" role="presentation">
+            <h1>{{doc.title}}</h1>
+            {{ doc.body | safe }}
+        </div>
+
+        <footer class="page-footer" style="margin-top: var(--space-xxx-large);">
+      <div class="viewport-container">
+
+        <style>
+          .page-footer__content a {
+            text-decoration-color: var(--color-blue-200) !important;
+          }
+          .page-footer__content a:hover {
+            text-decoration-color: var(--color-blue-100) !important;
+            text-decoration-thickness: 2 !important;
+          }
+          @media (max-width: 640px) {
+            .page-footer__content {
+              display: block;
+            }
+            .page-footer__content section:not(:last-child) {
+              margin-bottom: var(--space-xxx-large);
+            }
+          }
+        </style>
+
+        <div class="page-footer__content" style="min-height: 340px; grid-gap: var(--space-xxxxx-large);">
+          <section>
+            <h2>Library Design System Team</h2>
+            <ul>
+              <li>
+                <a href="mailto:library-design-system-team@umich.edu">library-design-system-team@umich.edu</a>
+              </li>
+               <li>
+                <a href="https://github.com/mlibrary/design-system">github.com/mlibrary/design-system</a>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+      <div class="page-footer__disclaimer">
+        <div class="viewport-container">
+          <p>© 2021, Regents of the University of Michigan</p>
+        </div>
+      </div>
+
+        <script type="text/javascript">
+            console.log('Web Document data', {{ doc | dump | safe  }});
+        </script>
+    </footer>
+    </body>
+</html>

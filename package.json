@@ -1,0 +1,17 @@
+{
+  "name": "design-system.lib.umich.edu",
+  "version": "1.0.0",
+  "description": "The public website for the Design System Team to document reusable designs and related University of Michigan Library website guidelines.",
+  "main": "index.js",
+  "scripts": {
+    "start": "eleventy --serve --port=1980"
+  },
+  "author": "University of Michigan Library Design System Team <library-design-system-team@umich.edu>",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "@sanity/block-content-to-html": "^2.0.0",
+    "@sanity/client": "^2.21.10",
+    "dotenv": "^10.0.0"
+  }
+}
