@@ -1,7 +1,10 @@
 require('dotenv').config()
 
+const h = require('hyperscript')
 const blocksToHtml = require('@sanity/block-content-to-html')
+const blocksToHyperScript = require('@sanity/block-content-to-hyperscript')
 const sanityClient = require('@sanity/client')
+
 const client = sanityClient({
   projectId: 'ods34681', // https://www.sanity.io/manage/personal/project/ods34681
   dataset: 'production',
@@ -10,37 +13,43 @@ const client = sanityClient({
   useCdn: false, // `false` if you want to ensure fresh data
 })
 
+function CalloutSerializer(props) {
+  return h('div', { className: 'message--callout' },
+    blocksToHyperScript({ blocks: props.node.content })
+  )
+}
+
+const serializers = {
+  types: {
+    callout: CalloutSerializer
+  }
+}
+
 async function fetchWebDocuments() {
   const query = '*[_type == "webdoc"]{ title, description, body, website->{ name } }'
   const result = await client.fetch(query)
 
+  function handleBodyToHtml(body) {
+    if (!body) {
+      return `<p>Hey! Go add some body content to this Web Document. You haven't added any content yet here.</p>`
+    }
+
+    return blocksToHtml({
+      blocks: body,
+      serializers: serializers
+    })
+  }
+
   const webdocs = result.map(doc => {
     return {
       ...doc,
-      body: bodyToHtml(doc.body)
+      body: handleBodyToHtml(doc.body)
     }
   })
 
   return webdocs
 }
 
-/**
- * https://github.com/sanity-io/block-content-to-html#customizing-default-serializer-for-block-type
- */
-function bodyToHtml(body) {
-  if (!body) {
-    return `<p>Body content for this Web Document is yet to be written and or published.</p>`
-  }
-
-  return blocksToHtml({
-    blocks: body
-  })
-}
-
 module.exports = async function() {
-  const webdocs = fetchWebDocuments()
-
-  console.log('webdocs.11tydata.js', webdocs)
-
-  return webdocs
+  return fetchWebDocuments()
 };
