@@ -14,8 +14,11 @@ const client = sanityClient({
 })
 
 function CalloutSerializer(props) {
-  return h('div', { className: 'message--callout' },
-    blocksToHyperScript({ blocks: props.node.content })
+  return h('div', { className: 'message' },
+    [
+      h('p', 'This is not an actual production callout, but an exampe that this is renderable and the Web Document Content Manager can configure some structured data and then render that to page with a serializer to our own HTML, such as this or even a web component if say the user wanted this to be dissmisable.'),
+      blocksToHyperScript({ blocks: props.node.content })
+    ]
   )
 }
 
