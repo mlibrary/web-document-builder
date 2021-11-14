@@ -37,7 +37,7 @@ permalink: "{{ doc.title | slug }}/"
 
         <div class="viewport-container" role="presentation">
             <h1>{{doc.title}}</h1>
-            {{ doc.body | safe }}
+            {{ doc.bodyHtml | safe }}
         </div>
 
         <footer class="page-footer" style="margin-top: var(--space-xxx-large);">
