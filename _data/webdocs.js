@@ -17,18 +17,20 @@ const client = sanityClient({
 
 async function fetchWebDocuments() {
   const query = `*[_type == "webdoc"]{
-    title, description, body, website->{ name }
+    title, description, body, slug, website->{ name }
   }`
   const result = await client.fetch(query)
 
-  return result.map(doc => {
+  return result.map(webDocument => {
     return {
-      ...doc,
-      bodyHtml: toHtml(doc.body)
+      ...webDocument,
+      bodyHtml: toHtml(webDocument.body)
     }
   })
 }
 
 module.exports = async function() {
-  return fetchWebDocuments()
+  const webDocuments = await fetchWebDocuments()
+
+  return webDocuments
 };

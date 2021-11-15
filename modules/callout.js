@@ -2,6 +2,10 @@ const h = require('hyperscript')
 const blocksToHyperScript = require('@sanity/block-content-to-hyperscript')
 
 module.exports = function CalloutModule(props) {
+  if (!props.node.content) {
+    return null
+  }
+
   return [
     h('style', `
       .callout {
