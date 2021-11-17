@@ -17,7 +17,7 @@ const client = sanityClient({
 
 async function fetchWebDocuments() {
   const query = `*[_type == "webdoc"]{
-    title, description, body, slug, website->{ name }
+    title, description, body, slug, website->{ name, landing_web_document->, main_navigation[]-> }
   }`
   const result = await client.fetch(query)
 

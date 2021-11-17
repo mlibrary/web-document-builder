@@ -13,6 +13,7 @@ permalink: "{{ doc.slug.current }}/index.html"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="https://unpkg.com/@umich-lib/web@1/umich-lib.css" rel="stylesheet"/>
+    <link href="/web-document.css" rel="stylesheet"/>
     <script type="module" src="https://unpkg.com/@umich-lib/web@1/dist/umich-lib/umich-lib.esm.js"></script>
 
     <title>{{ doc.title }} | {{ doc.website.name }}</title>
@@ -23,6 +24,18 @@ permalink: "{{ doc.slug.current }}/index.html"
 <body>
   <m-universal-header></m-universal-header>
   <m-website-header name="{{ doc.website.name }}"></m-website-header>
+
+  <nav aria-label="main" class="menu-nav" style="margin-top: var(--space-x-small); border-bottom: solid 2px var(--color-neutral-100);">
+    <div class="viewport-container">
+      <ol style="border: none;">
+        {% for doc in doc.website.main_navigation %}
+          <li>
+            <a href="/{{ doc.slug.current }}">{{ doc.title }}</a>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </nav>
 
   <nav aria-label="breadcrumbs" class="breadcrumbs">
     <div class="viewport-container" style="margin-top: var(--space-x-large);">
@@ -38,45 +51,14 @@ permalink: "{{ doc.slug.current }}/index.html"
   </nav>
 
   <main class="viewport-container">
-    <div class="page" style="margin-top: var(--space-x-large);">
+    <h1 class="page-heading">{{ doc.title }}</h1>
 
-      <h1 class="page-heading">{{ doc.title }}</h1>
-
-      <div class="page-content prose" style="grid-area: grouping;">
-        {{ doc.bodyHtml | safe }}
-      </div>
-
-      <nav aria-labelled-by="neighbors-heading" class="aside-nav">
-        <h2 class="subtle-heading">{{ parent }}</h2>
-
-        <ol>
-          {% for doc in webdocs %}
-            <a href="/{{ doc.slug.current }}">{{doc.title}}</a>
-          {% endfor %}
-        </ol>
-      </nav>
+    <div class="prose">
+      {{ doc.bodyHtml | safe }}
     </div>
   </main>
   <footer class="page-footer" style="margin-top: var(--space-xxx-large);">
     <div class="viewport-container">
-      <style>
-        .page-footer__content a {
-          text-decoration-color: var(--color-blue-200) !important;
-        }
-        .page-footer__content a:hover {
-          text-decoration-color: var(--color-blue-100) !important;
-          text-decoration-thickness: 2 !important;
-        }
-        @media (max-width: 640px) {
-          .page-footer__content {
-            display: block;
-          }
-          .page-footer__content section:not(:last-child) {
-            margin-bottom: var(--space-xxx-large);
-          }
-        }
-      </style>
-
       <div class="page-footer__content" style="min-height: 340px; grid-gap: var(--space-xxxxx-large);">
         <section>
           <h2>Library Design System Team</h2>

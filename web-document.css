@@ -1,0 +1,26 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto auto auto auto 1fr auto;
+  grid-template-columns: 100%;
+  min-height: 100%;
+}
+
+.page-footer__content a {
+  text-decoration-color: var(--color-blue-200) !important;
+}
+.page-footer__content a:hover {
+  text-decoration-color: var(--color-blue-100) !important;
+  text-decoration-thickness: 2 !important;
+}
+@media (max-width: 640px) {
+  .page-footer__content {
+    display: block;
+  }
+  .page-footer__content section:not(:last-child) {
+    margin-bottom: var(--space-xxx-large);
+  }
+}
