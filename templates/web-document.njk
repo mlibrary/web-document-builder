@@ -37,26 +37,32 @@ permalink: "{{ doc.slug.current }}/index.html"
     </div>
   </nav>
 
-  <nav aria-label="breadcrumbs" class="breadcrumbs">
-    <div class="viewport-container" style="margin-top: var(--space-x-large);">
-      <ol>
-        <li>
-          <a href="/">Welcome</a>
-        </li>
-        <li>
-          <a href="{{ page.url }}" aria-current="page">{{ doc.title }}</a>
-        </li>
-      </ol>
-    </div>
-  </nav>
+  <div class="viewport-container">
+    <div class="page" style="margin-top: var(--space-xxx-large);">
+      {% if doc.local_navigation[0] %}
+        <nav aria-labelled-by="neighbors-heading" class="aside-nav">
+          <h2 id="neighbors-heading" style="margin-top: 0;" class="subtle-heading">{{ doc.local_navigation[0].local_navigation_landing.title }}</h2>
+          <ol>
+            {% for doc in doc.local_navigation[0].local_navigation_links %}
+            <li>
+              <a href="/{{ doc.slug.current }}">{{ doc.title }}</a>
+            </li>
+            {% endfor %}
+          </ol>
+        </nav>
+      {% endif %}
 
-  <main class="viewport-container">
-    <h1 class="page-heading">{{ doc.title }}</h1>
 
-    <div class="prose">
-      {{ doc.bodyHtml | safe }}
+      <h1 class="page-heading">{{ doc.title }}</h1>
+
+      <main class="page-content">
+        <div class="prose">
+          {{ doc.bodyHtml | safe }}
+        </div>
+      </main>
+
     </div>
-  </main>
+  </div>
   <footer class="page-footer" style="margin-top: var(--space-xxx-large);">
     <div class="viewport-container">
       <div class="page-footer__content" style="min-height: 340px; grid-gap: var(--space-xxxxx-large);">

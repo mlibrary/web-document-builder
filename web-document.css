@@ -4,9 +4,13 @@ html, body {
 
 body {
   display: grid;
-  grid-template-rows: auto auto auto auto 1fr auto;
+  grid-template-rows: auto auto auto 1fr auto;
   grid-template-columns: 100%;
   min-height: 100%;
+}
+
+.page {
+  align-items: start;
 }
 
 .page-footer__content a {

@@ -17,7 +17,8 @@ const client = sanityClient({
 
 async function fetchWebDocuments() {
   const query = `*[_type == "webdoc"]{
-    title, description, body, slug, website->{ name, landing_web_document->, main_navigation[]-> }
+    title, description, body, slug, website->{ name, landing_web_document->, main_navigation[]-> },
+    "local_navigation": *[_type == "local_navigation" && references(^._id)]{ local_navigation_landing->, local_navigation_links[]-> }
   }`
   const result = await client.fetch(query)
 
