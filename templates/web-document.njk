@@ -12,9 +12,9 @@ permalink: "{{ doc.slug.current }}/index.html"
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link href="https://unpkg.com/@umich-lib/web@1/umich-lib.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/@umich-lib/web@dev/umich-lib.css" rel="stylesheet"/>
     <link href="/web-document.css" rel="stylesheet"/>
-    <script type="module" src="https://unpkg.com/@umich-lib/web@1/dist/umich-lib/umich-lib.esm.js"></script>
+    <script type="module" src="https://unpkg.com/@umich-lib/web@dev/dist/umich-lib/umich-lib.esm.js"></script>
 
     <title>{{ doc.title }} | {{ doc.website.name }}</title>
     <meta name="description" content="{{ doc.description }}">
@@ -39,23 +39,30 @@ permalink: "{{ doc.slug.current }}/index.html"
 
   <div class="viewport-container">
     <div class="page" style="margin-top: var(--space-xxx-large);">
-      {% if doc.local_navigation[0] %}
         <nav aria-labelled-by="neighbors-heading" class="aside-nav">
-          <h2 id="neighbors-heading" style="margin-top: 0;" class="subtle-heading">{{ doc.local_navigation[0].local_navigation_landing.title }}</h2>
-          <ol>
-            {% for doc in doc.local_navigation[0].local_navigation_links %}
-            <li>
-              <a href="/{{ doc.slug.current }}">{{ doc.title }}</a>
-            </li>
-            {% endfor %}
-          </ol>
+          {% if doc.local_navigation[0] %}
+            <h2 id="neighbors-heading" style="margin-top: 0;" class="subtle-heading">{{ doc.local_navigation[0].local_navigation_landing.title }}</h2>
+            <ol>
+              {% for doc in doc.local_navigation[0].local_navigation_links %}
+              <li>
+                <a href="/{{ doc.slug.current }}">{{ doc.title }}</a>
+              </li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <h2 id="neighbors-heading" style="margin-top: 0;" class="subtle-heading">Parent document title</h2>
+
+            <m-callout variant="warning">
+              <p>This web document is not referenced in a local navigation.</p>
+
+              <p>Make that edit to see local navigation appear here.</p>
+            </m-callout>
+          {% endif %}
         </nav>
-      {% endif %}
 
+      <main class="page-content" style="grid-area: heading;">
+        <h1 style="margin-top: 0;">{{ doc.title }}</h1>
 
-      <h1 class="page-heading">{{ doc.title }}</h1>
-
-      <main class="page-content">
         <div class="prose">
           {{ doc.bodyHtml | safe }}
         </div>
