@@ -17,12 +17,14 @@ const client = sanityClient({
 
 async function fetchWebDocuments() {
   const query = `*[_type == "webdoc"]{
-    title, description, body, slug, website->{ name, landing_web_document->, main_navigation[]-> },
+    title, description, body, slug, website->{ name, codename, landing_web_document->, main_navigation[]-> },
     "local_navigation": *[_type == "local_navigation" && references(^._id)]{ local_navigation_landing->, local_navigation_links[]-> }
   }`
-  const result = await client.fetch(query)
+  const allWebDocuments = await client.fetch(query)
+  // https://app.netlify.com/sites/umich-lib-design-system/settings/deploys#environment
+  const theseWebDocuments = allWebDocuments.filter(doc => doc.website.codename === process.env.WEB_DOCUMENT_WEBSITE_CODENAME)
 
-  return result.map(webDocument => {
+  return theseWebDocuments.map(webDocument => {
     return {
       ...webDocument,
       bodyHtml: toHtml(webDocument.body)
