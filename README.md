@@ -19,6 +19,8 @@ We use Netlify for production build and deploys, although this could be done any
 - https://umich-lib-webdocs.sanity.studio
 - https://www.sanity.io/docs/js-client
 
-`blocks/*` is where Body Content inserts are transformed from content into HTML for the Web Document.
+`blocks/*` is where Body Content inserts are transformed from content into HTML using HyperScript for the Web Document.
+
+- https://github.com/hyperhype/hyperscript
 
 `templates/web-document.njk` This is the single template that renders every web document. It's not too long since much of the page is determined by `blocks`.
