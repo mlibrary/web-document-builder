@@ -3,6 +3,7 @@ module.exports = {
     callout: require('./blocks/callout'),
     code_preview: require('./blocks/code-preview'),
     dont_and_do: require('./blocks/dont-and-do'),
-    colors: require('./blocks/colors')
+    colors: require('./blocks/colors'),
+    spacing: require('./blocks/spacing')
   }
 }
