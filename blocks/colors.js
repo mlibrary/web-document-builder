@@ -28,7 +28,12 @@ module.exports = function Colors() {
         palette.map(color => h('li', {
           id: color.name,
           style: `background: var(--${color.name})`
-        }, color.name))
+        },
+          [
+            h('code', `var(--${color.name})`),
+            h('code', `${color.value}`)
+          ]
+        ))
       )
     }
   ))
