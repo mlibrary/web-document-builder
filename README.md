@@ -11,3 +11,14 @@ WEB_DOCUMENT_WEBSITE_CODENAME
 ```
 
 We use Netlify for production build and deploys, although this could be done anywhere.
+
+## What's going on here?
+
+`_/data/webdocs.js` Where we connect to the Sanity client (Web Document Manager) and download Web Documents.
+
+- https://umich-lib-webdocs.sanity.studio
+- https://www.sanity.io/docs/js-client
+
+`blocks/*` is where Body Content inserts are transformed from content into HTML for the Web Document.
+
+`templates/web-document.njk` This is the single template that renders every web document. It's not too long since much of the page is determined by `blocks`.
