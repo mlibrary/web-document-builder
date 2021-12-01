@@ -24,3 +24,7 @@ We use Netlify for production build and deploys, although this could be done any
 - https://github.com/hyperhype/hyperscript
 
 `templates/web-document.njk` This is the single template that renders every web document. It's not too long since much of the page is determined by `blocks`.
+
+## Known oddities
+
+Changing a block requires two refreshes by 11ty to see them in development. I don't know why. I save twice to see the change.

@@ -2,7 +2,7 @@ const h = require('hyperscript')
 const blocksToHyperScript = require('@sanity/block-content-to-hyperscript')
 
 module.exports = function DontAndDos(props) {
-  return h('table.m-table', { style: 'table-layout: ixed;max-width:60ch;' }, [
+  return h('table.m-table', { style: 'table-layout: fixed;max-width:60ch;' }, [
     h('thead',
       h('tr', [
         h('th', "Don't"),

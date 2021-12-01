@@ -16,8 +16,14 @@ const client = sanityClient({
 })
 
 async function fetchWebDocuments() {
-  const query = `*[_type == "webdoc"]{
-    title, description, body, slug, website->{ name, codename, landing_web_document->, main_navigation[]-> },
+  /**
+   * Query webdocs that are not drafts and select the
+   * fields require for building web documents.
+   * 
+   * https://www.sanity.io/docs/query-cheat-sheet
+   */
+  const query = `*[_type == "webdoc" && !(_id in path("drafts.**"))]{
+    ..., website->{ ..., landing_web_document->, main_navigation[]-> },
     "local_navigation": *[_type == "local_navigation" && references(^._id)]{ local_navigation_landing->, local_navigation_links[]-> }
   }`
   const allWebDocuments = await client.fetch(query)

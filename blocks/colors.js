@@ -1,4 +1,4 @@
-const tokens = require('../design-tokens')
+const tokens = require('../design-tokens') // TODO: once this file is on production for @umich-lib/web, get it from there insteaad of a locally copied file.
 const h = require('hyperscript')
 
 const paletteTokens = tokens.props.reduce((acc, prop) => {
